@@ -1,0 +1,24 @@
+# **Critica: Multi-armed recommender system bandit ensembles**
+
+_**Impresión del Paper:**_ 
+
+>Presenta un nuevo enfoque basado en la resolución de problemas estadísticos conocido como **Bandits**, presentan el articulo muy bien explicado y con base teórica adecuada, la base matemática es indiferente pues aparte del método de Bandits, **usan los Modelos de Sistemas Recomendadores previos**, justamente ese es el fuerte de la metodología planteada lograrla **la mejor mezcla y obtener el resultado mas adecuado para los usuarios específicos** (_además genera gustos individuales lo cual personaliza los resultados aún más_).
+
+```[No solo se trata de participar, si no de Saber Jugar (Bandits): Es la elección, no la casualidad, lo que determina tu destino. {Jean Nidetch}].```
+
+El articulo comienza atacando el **paradigma de los métodos de recomendación** (_No personalizados, personalizados e híbridos_) acerca de uso de escenarios simplificados no iterativos (_desvinculados de la dinámica del sistema de interacción del usuario_) lo cual produce que la precisión se generalice y se busque **dejando la experiencia individual del usuario fuera de contexto** (_volviéndolo una similitud mas grupal_).
+
+La indicación de los B**andits de múltiples brazos** busca realizar la aplicación de diferentes métodos de recomendación y/o sus mezclas para obtener **mejoras en el rendimiento de las recomendaciones entregadas al usuario** (_ajustar la contribución de los algoritmos_), así pues se realiza la evaluación de que método o mezcla de los mismo usar cada vez que se quiere recomendar, lo cual permite ir **paso a paso seleccionando la mejor combinación de los mismos**. Esto incluye adicionales dinámicas como la evolución de los datos, experimentación, ajuste y actualización de las dinámicas además de los métodos de recomendación.
+
+Para la abstracción se generan lo componentes de Bandits como: **Brazos o posibilidades** (_Sistemas de Recomendación_), conjunto de **sistemas como Bandit** (_así definir la siguiente recomendación_), para ello proponen **dos métodos usados** en el paper (_Muestreo de Thompson y ε-reedy_), los cuales se comportan de diferentes maneras para seleccionar los **brazos basados en probabilidades** (_dejan claro que la modificación de estos métodos es abierta, como solucion al Bandit_).
+
+Obtienen m**ejorías respecto a la hibridación de métodos** debido a que solo calcula **un método o mezcla por vez**, lo cual permite ahorrar tiempo y capacidad de cómputo. Los hace ser débiles inicialmente  pero con el paso del tiempo superan a sus contrincantes (_por la inclusión del dinamismo y selección de método no estrictamente estacionaria_). Para la evaluación usan el **test A/B con el fin de reducir el tráfico de recomendación respecto de la efectividad** del mismo (_buscando maximizar los buenos resultados a nivel histórico_).
+
+Para definir adecuadamente el conjunto de trabajo de Bandit se define al **contexto** (_de donde se “aprende” y toman datos_) al **usuario**, los **brazos** como indique anteriormente son los **sistemas recomendadores disponibles**, Recompensa es **1 si existe satisfacción** o **0 si no la hay**, esto se ve aplicado al dataset de **MovieLens** (_1.000.209 ratings, 6040 Usuarios y 30706 Películas, Ajustando las salidas como 0 para ratings 3-5 y 1 para 4-5_). 
+```Lastimosamente solo se aplica sobre este Dataset```
+
+Algo que me dejo con mal sabor de boca fue la **poca cantidad de método usados**, pues en este caso múltiples métodos benefician al modelo (_usan kNN, MF y métodos no personalizados_), lo cual nos presentara posibles sesgos, pero es **suficiente para evaluar el funcionamiento de la metodología**, lo cual se ve reflejado en las graficas de salida de los elementos (_se ajustan solas dependiendo la historia y la dinámica del usuario_), otra cuestión inadecuada es **no usar múltiples métricas de medición**. (_Finalmente es el primer acercamiento y los autores posiblemente dejan espacio a más investigaciones_).
+
+**Trabajo a Futuro:** `Se puede desarrollar ajustes y la inclusión de más métodos para realizar las comparaciones y mezclas más adecuadas. Un trabajo adicional seria agregar la normalización de usuarios (usuarios que califican bajo o muy alto) y la segmentación de grupos de los mismos y los ítems. Por último generar grupos de sistemas Recomendadores que usen dinámicas complementarias (usen distintas naturalezas y hayan sido probadas), así en vez de escoger un solo brazo se puede escoger la mezcla de un brazo con varios métodos (aumentado así las probabilidades de mejora).`
+
+* > **PD**: No se sabe bien si se ajustaron los **parámetros de los sistemas de recomendación de manera optima**, además no muestran muchas métricas pueden indicar que se indican solo los resultados que son beneficiosos a a la investigación
